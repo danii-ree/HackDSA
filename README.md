@@ -15,11 +15,6 @@ AlgoLens is a browser-based educational tool that combines step-by-step algorith
 - [Getting Started](#getting-started)
 - [Usage](#usage)
 - [Keyboard Shortcuts](#keyboard-shortcuts)
-- [Technology Stack](#technology-stack)
-- [Project Structure](#project-structure)
-- [Contributing](#contributing)
-- [License](#license)
-
 ---
 
 ## Overview
@@ -148,38 +143,6 @@ A searchable complexity table listing best, average, and worst-case time and spa
 
 ---
 
-## Getting Started
-
-AlgoLens is a single-file React application. No build step or package installation is required for basic use.
-
-### Option 1: Open Directly in Browser
-
-Download `AlgoLens.jsx` and open it in any modern browser that supports ES modules. For full functionality, serve it via a local HTTP server to avoid CORS restrictions on font loading.
-
-```bash
-# Using Python
-python3 -m http.server 8080
-
-# Using Node.js
-npx serve .
-```
-
-Then navigate to `http://localhost:8080`.
-
-### Option 2: Embed in a React Project
-
-Copy `AlgoLens.jsx` into your project's component directory and import it as a standard React component.
-
-```jsx
-import AlgoLens from './components/AlgoLens';
-
-function App() {
-  return <AlgoLens />;
-}
-```
-
----
-
 ## Usage
 
 1. Open the application and allow fonts to load (approximately one second on a standard connection).
@@ -200,60 +163,6 @@ function App() {
 | `Space` | Play / Pause |
 | `Arrow Right` | Step forward one frame |
 | `Arrow Left` | Step backward one frame |
-| `R` | Reset to initial state |
-
----
-
-## Technology Stack
-
-| Layer | Technology |
-|---|---|
-| Framework | React (hooks-based, no class components) |
-| Rendering | SVG (all tree and graph structures) |
-| Animation | `requestAnimationFrame` / `setInterval` |
-| Syntax highlighting | highlight.js via CDN |
-| Fonts | JetBrains Mono, Syne, DM Sans (Google Fonts) |
-| State persistence | localStorage |
-| Build requirement | None (single-file, CDN-loaded dependencies) |
-
-All algorithm logic is implemented in plain JavaScript with no external algorithm libraries.
-
----
-
-## Project Structure
-
-```
-AlgoLens/
-├── AlgoLens.jsx          # Complete application (single file)
-├── README.md             # This file
-└── LICENSE               # License information
-```
-
-Because the application is intentionally self-contained, all styles, components, and logic reside in `AlgoLens.jsx`. This makes it straightforward to deploy, share, or embed without dependency management.
-
----
-
-## Contributing
-
-Contributions are welcome. If you would like to add a new algorithm, fix a visualization bug, or improve quiz content, please follow the steps below.
-
-1. Fork this repository.
-2. Create a feature branch: `git checkout -b feature/algorithm-name`
-3. Implement your changes and verify that existing visualizations are unaffected.
-4. Submit a pull request with a clear description of what was added or changed.
-
-When adding a new algorithm, please include:
-- The visualization logic (step generation)
-- The corresponding code in all four supported languages
-- At least four quiz questions (two Concept, one Trace, one Challenge)
-- An entry in the Reference Sheet complexity table
-
----
-
-## License
-
-This project is released under the MIT License. See `LICENSE` for full terms.
-
----
+| `R` | Reset to initial state |---
 
 *AlgoLens is intended as a learning aid and is not affiliated with any university or academic institution.*
