@@ -139,7 +139,7 @@ Two sub-modes are available:
 
 ### Reference Sheet
 
-A searchable complexity table listing best, average, and worst-case time and space complexity for every covered algorithm. Includes a properties column indicating whether each algorithm is stable, in-place, or recursive. A "When to Use" guide helps students reason about algorithm selection. A print-friendly stylesheet is applied when using the browser's print function.
+A searchable complexity table listing best, average, and worst-case time and space complexity for every covered algorithm. Includes a properties column indicating whether each algorithm is stable, in-place, or recursive. A "When to Use" guide helps students reason about algorithm selection.
 
 ---
 

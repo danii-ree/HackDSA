@@ -109,8 +109,6 @@ body {
   border-radius: 3px;
 }
 
-}
-
 /* Mobile Responsiveness Utilities */
 @media (max-width: 768px) {
   .flex-col-mobile {
