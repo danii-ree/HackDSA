@@ -16,6 +16,7 @@
 strip.js
 stripColors.js
 stripFonts.js
+find_emojis.js
 
 # next.js
 /.next/
