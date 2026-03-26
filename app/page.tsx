@@ -14,7 +14,7 @@ type NavSection = 'visualizer' | 'codelab' | 'quiz' | 'reference';
 const NAV_ITEMS: { id: NavSection; icon: React.ReactNode; label: string }[] = [
   { id: 'visualizer', icon: <Microscope size={20} />, label: 'Visualizer' },
   { id: 'codelab', icon: <Code size={20} />, label: 'Code Lab' },
-  { id: 'quiz', icon: <Puzzle size={20} />, label: 'Quiz Mode' },
+  { id: 'quiz', icon: <Puzzle size={20} />, label: 'Quiz' },
   { id: 'reference', icon: <BookOpen size={20} />, label: 'Reference' },
 ];
 
