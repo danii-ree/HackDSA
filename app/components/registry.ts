@@ -223,7 +223,7 @@ function getCode(id: string, lang: string): string {
 }
 
 export const ALGORITHMS: Algorithm[] = [
-    // ── SORTING ──
+    // SORTING
     {
         id: 'bubble-sort', name: 'Bubble Sort', category: 'sorting',
         timeComplexity: { best: 'O(n)', avg: 'O(n²)', worst: 'O(n²)' }, spaceComplexity: 'O(1)',
@@ -289,7 +289,7 @@ export const ALGORITHMS: Algorithm[] = [
         defaultCode: { javascript: `// Sort by each digit position using counting sort as subroutine`, python: `# See algoSteps.ts`, java: `// Java`, cpp: `// C++` },
     },
 
-    // ── SEARCHING ──
+    // SEARCHING
     {
         id: 'linear-search', name: 'Linear Search', category: 'searching',
         timeComplexity: { best: 'O(1)', avg: 'O(n)', worst: 'O(n)' }, spaceComplexity: 'O(1)',
@@ -319,7 +319,7 @@ export const ALGORITHMS: Algorithm[] = [
         defaultCode: { javascript: `function interpolationSearch(arr, target) {\n  let lo = 0, hi = arr.length - 1;\n  while (lo <= hi && target >= arr[lo] && target <= arr[hi]) {\n    const pos = lo + Math.floor((hi - lo) * (target - arr[lo]) / (arr[hi] - arr[lo]));\n    if (arr[pos] === target) return pos;\n    if (arr[pos] < target) lo = pos + 1;\n    else hi = pos - 1;\n  }\n  return -1;\n}`, python: `# Similar to binary search with proportional probe`, java: `// Java`, cpp: `// C++` },
     },
 
-    // ── TREES ──
+    // TREES
     {
         id: 'bst', name: 'BST Insert', category: 'trees',
         timeComplexity: { best: 'O(log n)', avg: 'O(log n)', worst: 'O(n)' }, spaceComplexity: 'O(n)',
@@ -360,7 +360,7 @@ export const ALGORITHMS: Algorithm[] = [
         defaultCode: { javascript: `function levelOrder(root) {\n  if (!root) return [];\n  const queue = [root], result = [];\n  while (queue.length) {\n    const node = queue.shift();\n    result.push(node.val);\n    if (node.left) queue.push(node.left);\n    if (node.right) queue.push(node.right);\n  }\n  return result;\n}`, python: `from collections import deque\ndef level_order(root):\n    queue = deque([root])\n    while queue:\n        node = queue.popleft()\n        print(node.val)\n        if node.left: queue.append(node.left)\n        if node.right: queue.append(node.right)`, java: `// Java`, cpp: `// C++` },
     },
 
-    // ── GRAPHS ──
+    // GRAPHS
     {
         id: 'bfs', name: 'BFS', category: 'graphs',
         timeComplexity: { best: 'O(V+E)', avg: 'O(V+E)', worst: 'O(V+E)' }, spaceComplexity: 'O(V)',
@@ -412,7 +412,7 @@ export const ALGORITHMS: Algorithm[] = [
         defaultCode: { javascript: `// Kahn's algorithm: process nodes with in-degree 0`, python: `from collections import deque\ndef topo_sort(graph, in_deg):\n    queue = deque(v for v in graph if in_deg[v] == 0)\n    order = []\n    while queue:\n        v = queue.popleft()\n        order.append(v)\n        for nb in graph[v]:\n            in_deg[nb] -= 1\n            if in_deg[nb] == 0: queue.append(nb)\n    return order`, java: `// Java`, cpp: `// C++` },
     },
 
-    // ── HASH ──
+    // HASH
     {
         id: 'hash-chaining', name: 'Hash Table (Chaining)', category: 'hash',
         timeComplexity: { best: 'O(1)', avg: 'O(1)', worst: 'O(n)' }, spaceComplexity: 'O(n+m)',
@@ -428,7 +428,7 @@ export const ALGORITHMS: Algorithm[] = [
         defaultCode: { javascript: `// On collision: probe (h + 1) % size, (h + 2) % size, ...`, python: `# See hash-chaining`, java: `// Java`, cpp: `// C++` },
     },
 
-    // ── LINEAR ──
+    // LINEAR
     {
         id: 'array-ops', name: 'Array Operations', category: 'linear',
         timeComplexity: { best: 'O(1)', avg: 'O(n)', worst: 'O(n)' }, spaceComplexity: 'O(1)',
@@ -465,7 +465,7 @@ export const ALGORITHMS: Algorithm[] = [
         defaultCode: { javascript: `class DNode { constructor(val) { this.val = val; this.prev = this.next = null; } }`, python: `class DNode:\n    def __init__(self, val):\n        self.val = val\n        self.prev = self.next = None`, java: `// Java`, cpp: `// C++` },
     },
 
-    // ── DP ──
+    // DP
     {
         id: 'fibonacci', name: 'Fibonacci (DP)', category: 'dp',
         timeComplexity: { best: 'O(n)', avg: 'O(n)', worst: 'O(n)' }, spaceComplexity: 'O(n)',
@@ -490,8 +490,8 @@ export const ALGORITHMS: Algorithm[] = [
 ];
 
 export const CATEGORY_LABELS: Record<string, string> = {
-    sorting: '⬆ Sorting', searching: '🔍 Searching', trees: '🌲 Trees',
-    graphs: '🕸 Graphs', hash: '#️⃣ Hash Tables', linear: '📦 Linear Structures', dp: '🔢 Dynamic Programming',
+    sorting: 'Sorting', searching: 'Searching', trees: 'Trees',
+    graphs: 'Graphs', hash: 'Hash Tables', linear: 'Linear Structures', dp: 'Dynamic Programming',
 };
 
 export function getAlgorithm(id: string): Algorithm | undefined {

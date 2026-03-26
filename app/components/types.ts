@@ -1,4 +1,4 @@
-// Shared types for AlgoLens
+// Shared types for HackDSA
 
 export type AlgoCategory =
     | 'sorting'

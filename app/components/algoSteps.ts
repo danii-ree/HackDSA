@@ -1,6 +1,6 @@
 import type { AlgoStep, ArrayBar, NodeState } from './types';
 
-// ── Utility helpers ──────────────────────────────────────────────────────────
+// Utility helpers
 
 function makeBars(arr: number[]): ArrayBar[] {
     return arr.map((v, i) => ({ value: v, state: 'default' as NodeState, index: i }));
@@ -18,7 +18,7 @@ function snap(bars: ArrayBar[], desc: string, extra: Partial<AlgoStep> = {}): Al
     return { bars: bars.map((b) => ({ ...b })), description: desc, ...extra };
 }
 
-// ── BUBBLE SORT ──────────────────────────────────────────────────────────────
+// BUBBLE SORT
 
 export function bubbleSortSteps(input: number[]): AlgoStep[] {
     const steps: AlgoStep[] = [];
@@ -56,7 +56,7 @@ export function bubbleSortSteps(input: number[]): AlgoStep[] {
     return steps;
 }
 
-// ── SELECTION SORT ───────────────────────────────────────────────────────────
+// SELECTION SORT
 
 export function selectionSortSteps(input: number[]): AlgoStep[] {
     const steps: AlgoStep[] = [];
@@ -101,7 +101,7 @@ export function selectionSortSteps(input: number[]): AlgoStep[] {
     return steps;
 }
 
-// ── INSERTION SORT ───────────────────────────────────────────────────────────
+// INSERTION SORT
 
 export function insertionSortSteps(input: number[]): AlgoStep[] {
     const steps: AlgoStep[] = [];
@@ -138,7 +138,7 @@ export function insertionSortSteps(input: number[]): AlgoStep[] {
     return steps;
 }
 
-// ── MERGE SORT ───────────────────────────────────────────────────────────────
+// MERGE SORT
 
 export function mergeSortSteps(input: number[]): AlgoStep[] {
     const steps: AlgoStep[] = [];
@@ -186,7 +186,7 @@ export function mergeSortSteps(input: number[]): AlgoStep[] {
     return steps;
 }
 
-// ── QUICK SORT ───────────────────────────────────────────────────────────────
+// QUICK SORT
 
 export function quickSortSteps(input: number[]): AlgoStep[] {
     const steps: AlgoStep[] = [];
@@ -232,7 +232,7 @@ export function quickSortSteps(input: number[]): AlgoStep[] {
     return steps;
 }
 
-// ── HEAP SORT ────────────────────────────────────────────────────────────────
+// HEAP SORT
 
 export function heapSortSteps(input: number[]): AlgoStep[] {
     const steps: AlgoStep[] = [];
@@ -267,7 +267,7 @@ export function heapSortSteps(input: number[]): AlgoStep[] {
     return steps;
 }
 
-// ── COUNTING SORT ────────────────────────────────────────────────────────────
+// COUNTING SORT
 
 export function countingSortSteps(input: number[]): AlgoStep[] {
     const steps: AlgoStep[] = [];
@@ -300,7 +300,7 @@ export function countingSortSteps(input: number[]): AlgoStep[] {
     return steps;
 }
 
-// ── RADIX SORT ───────────────────────────────────────────────────────────────
+// RADIX SORT
 
 export function radixSortSteps(input: number[]): AlgoStep[] {
     const steps: AlgoStep[] = [];
@@ -330,7 +330,7 @@ export function radixSortSteps(input: number[]): AlgoStep[] {
     return steps;
 }
 
-// ── LINEAR SEARCH ────────────────────────────────────────────────────────────
+// LINEAR SEARCH
 
 export function linearSearchSteps(input: number[]): AlgoStep[] {
     const steps: AlgoStep[] = [];
@@ -343,7 +343,7 @@ export function linearSearchSteps(input: number[]): AlgoStep[] {
         const b = makeBars(arr);
         b[i].state = 'visiting';
         for (let k = 0; k < i; k++) b[k].state = 'visited';
-        steps.push(snap(b, `Checking index ${i}: value = ${arr[i]}${arr[i] === target ? ' ✓ FOUND!' : ' ✗'}.`, { highlightLines: [3] }));
+        steps.push(snap(b, `Checking index ${i}: value = ${arr[i]}${arr[i] === target ? ' [FOUND]' : ' [MISMATCH]'}.`, { highlightLines: [3] }));
         if (arr[i] === target) {
             const b2 = makeBars(arr);
             b2[i].state = 'found';
@@ -356,7 +356,7 @@ export function linearSearchSteps(input: number[]): AlgoStep[] {
     return steps;
 }
 
-// ── BINARY SEARCH ────────────────────────────────────────────────────────────
+// BINARY SEARCH
 
 export function binarySearchSteps(input: number[]): AlgoStep[] {
     const steps: AlgoStep[] = [];
@@ -392,7 +392,7 @@ export function binarySearchSteps(input: number[]): AlgoStep[] {
     return steps;
 }
 
-// ── JUMP SEARCH ──────────────────────────────────────────────────────────────
+// JUMP SEARCH
 
 export function jumpSearchSteps(input: number[]): AlgoStep[] {
     const steps: AlgoStep[] = [];
@@ -426,7 +426,7 @@ export function jumpSearchSteps(input: number[]): AlgoStep[] {
     return steps;
 }
 
-// ── FIBONACCI DP ─────────────────────────────────────────────────────────────
+// FIBONACCI DP
 
 export function fibonacciDPSteps(): AlgoStep[] {
     const steps: AlgoStep[] = [];
@@ -455,7 +455,7 @@ export function fibonacciDPSteps(): AlgoStep[] {
     return steps;
 }
 
-// ── LCS DP ───────────────────────────────────────────────────────────────────
+// LCS DP
 
 export function lcsDPSteps(): AlgoStep[] {
     const steps: AlgoStep[] = [];
@@ -493,7 +493,7 @@ export function lcsDPSteps(): AlgoStep[] {
     return steps;
 }
 
-// ── KNAPSACK DP ───────────────────────────────────────────────────────────────
+// KNAPSACK DP
 
 export function knapsackDPSteps(): AlgoStep[] {
     const steps: AlgoStep[] = [];

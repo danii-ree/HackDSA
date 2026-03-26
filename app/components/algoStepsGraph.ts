@@ -1,6 +1,6 @@
 import type { AlgoStep, GraphNode, GraphEdge, NodeState, TreeNode } from './types';
 
-// ── BST STEPS ────────────────────────────────────────────────────────────────
+// BST STEPS
 
 interface BSTState {
     nodes: Record<string, TreeNode>;
@@ -74,7 +74,7 @@ export function bstInsertSteps(values: number[]): AlgoStep[] {
     return steps;
 }
 
-// ── TREE TRAVERSALS ───────────────────────────────────────────────────────────
+// TREE TRAVERSALS
 
 export function treeTraversalSteps(type: 'inorder' | 'preorder' | 'postorder' | 'levelorder', values: number[]): AlgoStep[] {
     const steps: AlgoStep[] = [];
@@ -140,7 +140,7 @@ export function treeTraversalSteps(type: 'inorder' | 'preorder' | 'postorder' | 
     return steps;
 }
 
-// ── GRAPH HELPERS ─────────────────────────────────────────────────────────────
+// GRAPH HELPERS
 
 function makeDefaultGraph(): { nodes: GraphNode[]; edges: GraphEdge[] } {
     const nodes: GraphNode[] = [
@@ -171,7 +171,7 @@ function cloneGraph(nodes: GraphNode[], edges: GraphEdge[]): { nodes: GraphNode[
     };
 }
 
-// ── BFS ──────────────────────────────────────────────────────────────────────
+// BFS
 
 export function bfsSteps(): AlgoStep[] {
     const steps: AlgoStep[] = [];
@@ -215,7 +215,7 @@ export function bfsSteps(): AlgoStep[] {
     return steps;
 }
 
-// ── DFS ──────────────────────────────────────────────────────────────────────
+// DFS
 
 export function dfsSteps(): AlgoStep[] {
     const steps: AlgoStep[] = [];
@@ -248,7 +248,7 @@ export function dfsSteps(): AlgoStep[] {
     return steps;
 }
 
-// ── DIJKSTRA ─────────────────────────────────────────────────────────────────
+// DIJKSTRA
 
 export function dijkstraSteps(): AlgoStep[] {
     const steps: AlgoStep[] = [];
@@ -297,7 +297,7 @@ export function dijkstraSteps(): AlgoStep[] {
     return steps;
 }
 
-// ── PRIM'S MST ───────────────────────────────────────────────────────────────
+// PRIM'S MST
 
 export function primSteps(): AlgoStep[] {
     const steps: AlgoStep[] = [];
@@ -327,7 +327,7 @@ export function primSteps(): AlgoStep[] {
     return steps;
 }
 
-// ── KRUSKAL'S MST ────────────────────────────────────────────────────────────
+// KRUSKAL'S MST
 
 export function kruskalSteps(): AlgoStep[] {
     const steps: AlgoStep[] = [];
@@ -361,7 +361,7 @@ export function kruskalSteps(): AlgoStep[] {
     return steps;
 }
 
-// ── TOPOLOGICAL SORT ─────────────────────────────────────────────────────────
+// TOPOLOGICAL SORT
 
 export function topoSortSteps(): AlgoStep[] {
     const steps: AlgoStep[] = [];
@@ -410,7 +410,7 @@ export function topoSortSteps(): AlgoStep[] {
     return steps;
 }
 
-// ── BELLMAN-FORD ──────────────────────────────────────────────────────────────
+// BELLMAN-FORD
 
 export function bellmanFordSteps(): AlgoStep[] {
     const steps: AlgoStep[] = [];

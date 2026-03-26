@@ -1,8 +1,8 @@
-# AlgoLens
+# HackDSA
 
 **An interactive Data Structures and Algorithms visualizer for first-year university students.**
 
-AlgoLens is a browser-based educational tool that combines step-by-step algorithm visualization, a live code editor with syntax highlighting, structured quizzes, and a comprehensive reference sheet — all within a single, self-contained application. It is designed to bridge the gap between abstract algorithmic concepts and practical, visual understanding.
+HackDSA is a browser-based educational tool that combines step-by-step algorithm visualization, a live code editor with syntax highlighting, structured quizzes, and a comprehensive reference sheet — all within a single, self-contained application. It is designed to bridge the gap between abstract algorithmic concepts and practical, visual understanding.
 
 ---
 
@@ -19,7 +19,7 @@ AlgoLens is a browser-based educational tool that combines step-by-step algorith
 
 ## Overview
 
-AlgoLens was built with one goal: to make the study of data structures and algorithms more intuitive. Rather than tracing through pseudocode on paper or watching static diagrams, students can interact directly with algorithms — controlling playback speed, stepping through individual operations, editing the underlying code, and testing their knowledge through built-in quizzes.
+HackDSA was built with one goal: to make the study of data structures and algorithms more intuitive. Rather than tracing through pseudocode on paper or watching static diagrams, students can interact directly with algorithms — controlling playback speed, stepping through individual operations, editing the underlying code, and testing their knowledge through built-in quizzes.
 
 The application targets the standard curriculum of a first-year university Computer Science course and covers sorting, searching, trees, graphs, hash tables, linear structures, and introductory dynamic programming.
 
@@ -165,4 +165,4 @@ A searchable complexity table listing best, average, and worst-case time and spa
 | `Arrow Left` | Step backward one frame |
 | `R` | Reset to initial state |---
 
-*AlgoLens is intended as a learning aid and is not affiliated with any university or academic institution.*
+*HackDSA is intended as a learning aid and is not affiliated with any university or academic institution.*

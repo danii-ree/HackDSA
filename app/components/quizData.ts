@@ -1,7 +1,7 @@
 import type { QuizQuestion } from './types';
 
 export const QUIZ_QUESTIONS: QuizQuestion[] = [
-    // ── BUBBLE SORT ──
+    // BUBBLE SORT
     {
         id: 'bs1', topic: 'bubble-sort', difficulty: 'intro',
         question: 'What is the worst-case time complexity of Bubble Sort?',
@@ -38,7 +38,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
         explanation: 'Each element is in the wrong position relative to all following elements. Total inversions = n(n-1)/2.',
     },
 
-    // ── MERGE SORT ──
+    // MERGE SORT
     {
         id: 'ms1', topic: 'merge-sort', difficulty: 'intro',
         question: 'What paradigm does Merge Sort use?',
@@ -68,7 +68,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
         explanation: 'Merge Sort only needs sequential access, making it efficient for linked lists where random access is O(n).',
     },
 
-    // ── QUICK SORT ──
+    // QUICK SORT
     {
         id: 'qs1', topic: 'quick-sort', difficulty: 'intro',
         question: 'What is the average-case time complexity of Quick Sort?',
@@ -91,7 +91,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
         explanation: 'The call stack depth is O(log n) on average (balanced partitions) but O(n) worst case.',
     },
 
-    // ── BINARY SEARCH ──
+    // BINARY SEARCH
     {
         id: 'bin1', topic: 'binary-search', difficulty: 'intro',
         question: 'What is the precondition for Binary Search?',
@@ -114,7 +114,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
         explanation: 'If sorting costs O(n log n) but you only search once, Linear Search O(n) might be preferable.',
     },
 
-    // ── BST ──
+    // BST
     {
         id: 'bst1', topic: 'bst', difficulty: 'intro',
         question: 'In a BST, where is the minimum value located?',
@@ -137,7 +137,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
         explanation: 'In-order traversal (Left → Root → Right) of a BST visits nodes in ascending order.',
     },
 
-    // ── GRAPHS ──
+    // GRAPHS
     {
         id: 'gr1', topic: 'bfs', difficulty: 'intro',
         question: 'BFS uses which data structure?',
@@ -167,7 +167,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
         explanation: 'With a binary min-heap: O((V + E) log V) ≈ O(E log V) for connected graphs.',
     },
 
-    // ── HASH TABLE ──
+    // HASH TABLE
     {
         id: 'ht1', topic: 'hash', difficulty: 'intro',
         question: 'What is the average-case time for lookup in a hash table?',
@@ -190,7 +190,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
         explanation: 'Load factor λ = n/m. As λ → 1, collision probability rises and performance degrades.',
     },
 
-    // ── STACK/QUEUE ──
+    // STACK/QUEUE
     {
         id: 'sq1', topic: 'stack', difficulty: 'intro',
         question: 'A Stack follows which ordering principle?',
@@ -213,7 +213,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
         explanation: 'Push open brackets, pop on close; mismatch or non-empty stack at end = unbalanced.',
     },
 
-    // ── DP ──
+    // DP
     {
         id: 'dp1', topic: 'fibonacci', difficulty: 'intro',
         question: 'Without memoization, what is the time complexity of recursive Fibonacci?',

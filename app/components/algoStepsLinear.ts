@@ -2,7 +2,7 @@
 
 import type { AlgoStep, NodeState, HashBucket } from './types';
 
-// ── STACK STEPS ───────────────────────────────────────────────────────────────
+// STACK STEPS
 
 export function stackSteps(values: number[]): AlgoStep[] {
     const steps: AlgoStep[] = [];
@@ -27,7 +27,7 @@ export function stackSteps(values: number[]): AlgoStep[] {
     return steps;
 }
 
-// ── QUEUE STEPS ───────────────────────────────────────────────────────────────
+// QUEUE STEPS
 
 export function queueSteps(values: number[]): AlgoStep[] {
     const steps: AlgoStep[] = [];
@@ -52,7 +52,7 @@ export function queueSteps(values: number[]): AlgoStep[] {
     return steps;
 }
 
-// ── LINKED LIST STEPS ─────────────────────────────────────────────────────────
+// LINKED LIST STEPS
 
 export function linkedListSteps(type: 'singly' | 'doubly' | 'circular', values: number[]): AlgoStep[] {
     const steps: AlgoStep[] = [];
@@ -84,7 +84,7 @@ export function linkedListSteps(type: 'singly' | 'doubly' | 'circular', values: 
     return steps;
 }
 
-// ── ARRAY STEPS ───────────────────────────────────────────────────────────────
+// ARRAY STEPS
 
 export function arraySteps(values: number[]): AlgoStep[] {
     const steps: AlgoStep[] = [];
@@ -116,7 +116,7 @@ export function arraySteps(values: number[]): AlgoStep[] {
     return steps;
 }
 
-// ── HASH TABLE STEPS ──────────────────────────────────────────────────────────
+// HASH TABLE STEPS
 
 export function hashTableSteps(mode: 'chaining' | 'linear'): AlgoStep[] {
     const steps: AlgoStep[] = [];

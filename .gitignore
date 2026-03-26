@@ -13,6 +13,10 @@
 # testing
 /coverage
 
+strip.js
+stripColors.js
+stripFonts.js
+
 # next.js
 /.next/
 /out/
