@@ -13,8 +13,6 @@ HackDSA is a browser-based educational tool that combines step-by-step algorithm
 - [Supported Data Structures and Algorithms](#supported-data-structures-and-algorithms)
 - [Application Sections](#application-sections)
 - [Getting Started](#getting-started)
-- [Usage](#usage)
-- [Keyboard Shortcuts](#keyboard-shortcuts)
 ---
 
 ## Overview
@@ -141,28 +139,3 @@ Two sub-modes are available:
 
 A searchable complexity table listing best, average, and worst-case time and space complexity for every covered algorithm. Includes a properties column indicating whether each algorithm is stable, in-place, or recursive. A "When to Use" guide helps students reason about algorithm selection.
 
----
-
-## Usage
-
-1. Open the application and allow fonts to load (approximately one second on a standard connection).
-2. Select a category from the first dropdown (e.g., "Trees").
-3. Select a specific algorithm or structure from the second dropdown (e.g., "AVL Tree").
-4. Enter comma-separated values in the input field, or click "Randomize" to generate a dataset.
-5. Use the playback controls to run, pause, or step through the visualization.
-6. Read the step descriptions on the right to follow the algorithm's logic.
-7. Switch to "Code Lab" to inspect the implementation and experiment with edits.
-8. Use "Quiz Mode" to test your understanding of the selected topic.
-
----
-
-## Keyboard Shortcuts
-
-| Key | Action |
-|---|---|
-| `Space` | Play / Pause |
-| `Arrow Right` | Step forward one frame |
-| `Arrow Left` | Step backward one frame |
-| `R` | Reset to initial state |---
-
-*HackDSA is intended as a learning aid and is not affiliated with any university or academic institution.*
