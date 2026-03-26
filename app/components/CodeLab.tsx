@@ -122,11 +122,11 @@ export default function CodeLab() {
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', padding: 12, gap: 10 }}>
             {/* Top controls */}
             <div style={{ ...glass, padding: '10px 16px', display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
-                <select value={category} onChange={(e) => { setCategory(e.target.value); const first = getAlgorithmsByCategory(e.target.value).at(0); if (first) setAlgoId(first.id); }}
+                <select aria-label="Select Category" value={category} onChange={(e) => { setCategory(e.target.value); const first = getAlgorithmsByCategory(e.target.value).at(0); if (first) setAlgoId(first.id); }}
                     style={{ padding: '7px 12px', background: 'var(--bg-panel)', border: '1px solid var(--border-main)', borderRadius: 8, color: 'var(--text-primary)', fontFamily: 'system-ui, -apple-system, sans-serif', fontSize: 13, cursor: 'pointer' }}>
                     {CATEGORIES.map((c) => <option key={c} value={c}>{CATEGORY_LABELS[c]}</option>)}
                 </select>
-                <select value={algoId} onChange={(e) => setAlgoId(e.target.value)}
+                <select aria-label="Select Algorithm" value={algoId} onChange={(e) => setAlgoId(e.target.value)}
                     style={{ padding: '7px 12px', background: 'var(--bg-panel)', border: '1px solid var(--border-main)', borderRadius: 8, color: 'var(--text-primary)', fontFamily: 'system-ui, -apple-system, sans-serif', fontSize: 13, minWidth: 190, cursor: 'pointer' }}>
                     {catAlgos.map((a) => <option key={a.id} value={a.id}>{a.name}</option>)}
                 </select>

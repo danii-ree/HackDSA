@@ -141,7 +141,7 @@ export default function Visualizer({ onAlgoChange }: Props) {
 
     function iconBtn(icon: React.ReactNode, label: string, onClick: () => void, active = false, disabled = false): React.ReactElement {
         return (
-            <button title={label} onClick={onClick} disabled={disabled}
+            <button title={label} aria-label={label} onClick={onClick} disabled={disabled}
                 style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px 14px', borderRadius: 8, border: '1px solid var(--border-main)', background: active ? 'var(--accent-primary-bg)' : 'var(--bg-panel)', color: disabled ? 'var(--text-muted)' : 'var(--text-primary)', fontFamily: 'system-ui, -apple-system, sans-serif', fontWeight: 700, fontSize: 16, cursor: disabled ? 'not-allowed' : 'pointer', minWidth: 44, transition: 'all 0.15s' }}>
                 {icon}
             </button>
@@ -152,12 +152,12 @@ export default function Visualizer({ onAlgoChange }: Props) {
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 0 }}>
             {/* Top bar */}
             <div style={{ ...glass, margin: '12px 12px 0', padding: '12px 16px', display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
-            <select value={category} onChange={(e) => { setCategory(e.target.value); const first = getAlgorithmsByCategory(e.target.value).at(0); if (first) setAlgoId(first.id); }}
+                <select aria-label="Select Category" value={category} onChange={(e) => { setCategory(e.target.value); const first = getAlgorithmsByCategory(e.target.value).at(0); if (first) setAlgoId(first.id); }}
                     style={{ padding: '8px 12px', background: 'var(--bg-panel)', border: '1px solid var(--border-main)', borderRadius: 8, color: 'var(--text-primary)', fontFamily: 'system-ui, -apple-system, sans-serif', fontSize: 14, cursor: 'pointer' }}>
                     {CATEGORIES.map((c) => <option key={c} value={c}>{CATEGORY_LABELS[c]}</option>)}
                 </select>
 
-                <select value={algoId} onChange={(e) => setAlgoId(e.target.value)}
+                <select aria-label="Select Algorithm" value={algoId} onChange={(e) => setAlgoId(e.target.value)}
                     style={{ padding: '8px 12px', background: 'var(--bg-panel)', border: '1px solid var(--border-main)', borderRadius: 8, color: 'var(--text-primary)', fontFamily: 'system-ui, -apple-system, sans-serif', fontSize: 14, cursor: 'pointer', minWidth: 200 }}>
                     {catAlgos.map((a) => <option key={a.id} value={a.id}>{a.name}</option>)}
                 </select>

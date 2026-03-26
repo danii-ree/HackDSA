@@ -144,7 +144,7 @@ export default function Home() {
         {/* Logo */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
           <div style={{ width: 38, height: 38, borderRadius: 12, background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-alt))', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', boxShadow: '0 0 15px var(--accent-primary-border)' }}>
-            <a href='/' style={{ textDecoration: 'none', color: 'inherit' }}><Microscope size={22} /></a>
+            <a href='/' aria-label="HackDSA Home" style={{ textDecoration: 'none', color: 'inherit' }}><Microscope size={22} /></a>
           </div>
           <div className="hide-mobile" style={{ fontFamily: 'system-ui, -apple-system, sans-serif', fontSize: 22, fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.5px' }}>
             <a href='/' style={{ textDecoration: 'none', color: 'inherit' }}>HackDSA</a>
@@ -156,7 +156,7 @@ export default function Home() {
           {NAV_ITEMS.map((item, i) => {
             const active = activeSection === item.id;
             return (
-              <button key={item.id} onClick={() => navigate(item.id)} title={item.label}
+              <button key={item.id} onClick={() => navigate(item.id)} title={item.label} aria-label={item.label} aria-current={active ? 'page' : undefined}
                 style={{
                   display: 'flex', alignItems: 'center', gap: 8,
                   padding: '8px 16px',
