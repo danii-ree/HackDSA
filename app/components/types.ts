@@ -111,17 +111,18 @@ export interface Algorithm {
 export interface QuizQuestion {
     id: string;
     topic: string;
-    difficulty: 'intro' | 'standard' | 'challenge';
+    difficulty: 'easy' | 'medium' | 'hard' | 'intro' | 'standard' | 'challenge';
     question: string;
     options: string[];
-    correctIndex: number;
+    correctIndex: number | number[];
+    isMultipleSelect?: boolean;
     explanation: string;
 }
 
 export interface TraceQuiz {
     id: string;
     topic: string;
-    difficulty: 'intro' | 'standard' | 'challenge';
+    difficulty: 'easy' | 'medium' | 'hard' | 'intro' | 'standard' | 'challenge';
     prompt: string;
     setupStep: AlgoStep;
     answer: string;

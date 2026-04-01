@@ -5,33 +5,25 @@ import type { QuizQuestion } from './types';
 import { ALGORITHMS } from './registry';
 import { Circle, PartyPopper, BookOpen, RotateCcw, Lightbulb, Puzzle } from 'lucide-react';
 
+const dynamicTopics = Array.from(new Set(QUIZ_QUESTIONS.map(q => q.topic)));
 const TOPICS = [
     { id: 'all', label: 'All Topics' },
-    { id: 'bubble-sort', label: 'Bubble Sort' },
-    { id: 'merge-sort', label: 'Merge Sort' },
-    { id: 'quick-sort', label: 'Quick Sort' },
-    { id: 'binary-search', label: 'Binary Search' },
-    { id: 'bst', label: 'BST' },
-    { id: 'bfs', label: 'BFS' },
-    { id: 'dfs', label: 'DFS' },
-    { id: 'dijkstra', label: 'Dijkstra' },
-    { id: 'hash', label: 'Hash Table' },
-    { id: 'stack', label: 'Stack' },
-    { id: 'queue', label: 'Queue' },
-    { id: 'fibonacci', label: 'Fibonacci DP' },
-    { id: 'knapsack', label: 'Knapsack DP' },
+    ...dynamicTopics.map(t => ({
+        id: t,
+        label: t.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
+    }))
 ];
 
 const DIFFICULTIES = [
-    { id: 'intro' as const, label: 'Intro', icon: <Circle size={12} fill="var(--color-success)" />, color: 'var(--color-success)' },
-    { id: 'standard' as const, label: 'Standard', icon: <Circle size={12} fill="var(--color-warning)" />, color: 'var(--color-warning)' },
-    { id: 'challenge' as const, label: 'Challenge', icon: <Circle size={12} fill="var(--color-danger)" />, color: 'var(--color-danger)' },
+    { id: 'easy' as const, label: 'Easy', icon: <Circle size={12} fill="var(--color-success)" />, color: 'var(--color-success)' },
+    { id: 'medium' as const, label: 'Medium', icon: <Circle size={12} fill="var(--color-warning)" />, color: 'var(--color-warning)' },
+    { id: 'hard' as const, label: 'Hard', icon: <Circle size={12} fill="var(--color-danger)" />, color: 'var(--color-danger)' },
 ];
 
 interface QuizState {
     questions: QuizQuestion[];
     currentIndex: number;
-    selected: number | null;
+    selected: number | number[] | null;
     showResult: boolean;
     score: number;
     startTime: number;
@@ -49,7 +41,7 @@ const glass: React.CSSProperties = {
 export default function QuizMode() {
     const [mode, setMode] = useState<'concept' | 'trace'>('concept');
     const [topic, setTopic] = useState('all');
-    const [difficulty, setDifficulty] = useState<'intro' | 'standard' | 'challenge'>('intro');
+    const [difficulty, setDifficulty] = useState<'easy' | 'medium' | 'hard'>('easy');
     const [quiz, setQuiz] = useState<QuizState | null>(null);
     const [shake, setShake] = useState(false);
     const [wrongIndex, setWrongIndex] = useState<number | null>(null);
@@ -57,20 +49,42 @@ export default function QuizMode() {
     function startQuiz() {
         const qs = getQuestionsForTopic(topic, difficulty);
         if (!qs.length) return;
-        setQuiz({ questions: qs, currentIndex: 0, selected: null, showResult: false, score: 0, startTime: Date.now(), finished: false });
+        setQuiz({ questions: qs, currentIndex: 0, selected: qs[0]?.isMultipleSelect ? [] : null, showResult: false, score: 0, startTime: Date.now(), finished: false });
         setShake(false); setWrongIndex(null);
     }
 
     function selectAnswer(i: number) {
         if (!quiz || quiz.showResult) return;
-        const correct = quiz.questions[quiz.currentIndex].correctIndex;
-        const isCorrect = i === correct;
+        const q = quiz.questions[quiz.currentIndex];
+
+        if (q.isMultipleSelect) {
+            const currentSelected = Array.isArray(quiz.selected) ? quiz.selected : [];
+            const newSelected = currentSelected.includes(i) ? currentSelected.filter(val => val !== i) : [...currentSelected, i];
+            setQuiz((prev) => prev ? { ...prev, selected: newSelected } : prev);
+        } else {
+            const correct = q.correctIndex as number;
+            const isCorrect = i === correct;
+            if (!isCorrect) {
+                setShake(true);
+                setWrongIndex(i);
+                setTimeout(() => setShake(false), 500);
+            }
+            setQuiz((prev) => prev ? { ...prev, selected: i, showResult: true, score: isCorrect ? prev.score + 1 : prev.score } : prev);
+        }
+    }
+
+    function submitMultiSelect() {
+        if (!quiz || quiz.showResult) return;
+        const q = quiz.questions[quiz.currentIndex];
+        const correct = Array.isArray(q.correctIndex) ? q.correctIndex : [q.correctIndex];
+        const currentSelected = Array.isArray(quiz.selected) ? quiz.selected : [];
+        
+        const isCorrect = currentSelected.length === correct.length && correct.every(c => currentSelected.includes(c as number));
         if (!isCorrect) {
             setShake(true);
-            setWrongIndex(i);
             setTimeout(() => setShake(false), 500);
         }
-        setQuiz((q) => q ? { ...q, selected: i, showResult: true, score: isCorrect ? q.score + 1 : q.score } : q);
+        setQuiz((prev) => prev ? { ...prev, showResult: true, score: isCorrect ? prev.score + 1 : prev.score } : prev);
     }
 
     function nextQuestion() {
@@ -79,7 +93,8 @@ export default function QuizMode() {
         if (quiz.currentIndex + 1 >= quiz.questions.length) {
             setQuiz((q) => q ? { ...q, finished: true } : q);
         } else {
-            setQuiz((q) => q ? { ...q, currentIndex: q.currentIndex + 1, selected: null, showResult: false } : q);
+            const nextQ = quiz.questions[quiz.currentIndex + 1];
+            setQuiz((q) => q ? { ...q, currentIndex: q.currentIndex + 1, selected: nextQ.isMultipleSelect ? [] : null, showResult: false } : q);
         }
     }
 
@@ -146,26 +161,38 @@ export default function QuizMode() {
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                         {q.options.map((opt, i) => {
                             let bg = 'var(--bg-panel-trans)', border = 'var(--border-main)', color = 'var(--text-primary)', glow = 'none';
+                            const isSelected = Array.isArray(quiz.selected) ? quiz.selected.includes(i) : quiz.selected === i;
+                            const isCorrectAnswer = Array.isArray(q.correctIndex) ? q.correctIndex.includes(i) : q.correctIndex === i;
+
                             if (quiz.showResult) {
-                                if (i === q.correctIndex) { bg = 'var(--color-success-bg)'; border = 'var(--color-success)'; color = 'var(--color-success)'; glow = '0 0 12px var(--color-success)44'; }
-                                else if (i === quiz.selected && i !== q.correctIndex) { bg = 'var(--color-danger-bg)'; border = 'var(--color-danger)'; color = 'var(--color-danger)'; }
+                                if (isCorrectAnswer) { bg = 'var(--color-success-bg)'; border = 'var(--color-success)'; color = 'var(--color-success)'; glow = '0 0 12px var(--color-success)44'; }
+                                else if (isSelected && !isCorrectAnswer) { bg = 'var(--color-danger-bg)'; border = 'var(--color-danger)'; color = 'var(--color-danger)'; }
+                            } else if (isSelected) {
+                                border = 'var(--accent-primary)';
+                                bg = 'var(--accent-primary-bg)';
                             }
+
                             return (
                                 <button key={i} onClick={() => selectAnswer(i)}
                                     style={{
                                         padding: '14px 20px', background: bg, border: `2px solid ${border}`, borderRadius: 10,
                                         color, textAlign: 'left', fontFamily: 'system-ui, -apple-system, sans-serif', fontSize: 15, cursor: quiz.showResult ? 'default' : 'pointer',
                                         boxShadow: glow, transition: 'all 0.2s',
-                                        animation: shake && i === wrongIndex ? 'shake 0.3s ease' : undefined,
+                                        animation: shake && (!q.isMultipleSelect && i === wrongIndex) ? 'shake 0.3s ease' : undefined,
                                     }}>
                                     <span style={{ fontFamily: 'JetBrains Mono', color: 'var(--text-secondary)', marginRight: 10 }}>{String.fromCharCode(65 + i)}.</span>
                                     {opt}
-                                    {quiz.showResult && i === q.correctIndex && ' ✓'}
-                                    {quiz.showResult && i === quiz.selected && i !== q.correctIndex && ' ✗'}
+                                    {quiz.showResult && isCorrectAnswer && ' ✓'}
+                                    {quiz.showResult && isSelected && !isCorrectAnswer && ' ✗'}
                                 </button>
                             );
                         })}
                     </div>
+                    {q.isMultipleSelect && !quiz.showResult && (
+                        <button onClick={submitMultiSelect} style={{ marginTop: 16, padding: '12px 24px', background: 'var(--accent-primary)', border: 'none', borderRadius: 8, color: 'var(--bg-main)', fontFamily: 'system-ui, -apple-system, sans-serif', fontWeight: 700, fontSize: 15, cursor: 'pointer', alignSelf: 'flex-start' }}>
+                            Submit Answer
+                        </button>
+                    )}
 
                     {quiz.showResult && (
                         <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 20, padding: '14px 18px', background: 'var(--accent-primary-bg)', border: '1px solid var(--accent-primary-border)', borderRadius: 8, fontFamily: 'system-ui, -apple-system, sans-serif', fontSize: 14, color: 'var(--text-primary)', lineHeight: 1.6 }}>
