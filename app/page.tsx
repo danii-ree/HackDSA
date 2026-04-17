@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
-
+import { Analytics } from "@vercel/analytics/next"
 const Visualizer = dynamic(() => import('./components/Visualizer'), { ssr: false });
 const CodeLab = dynamic(() => import('./components/CodeLab'), { ssr: false });
 const QuizMode = dynamic(() => import('./components/QuizMode'), { ssr: false });
@@ -203,7 +203,7 @@ export default function Home() {
           )}
         </div>
       </main>
-
+      <Analytics/>
     </div>
   );
 }
