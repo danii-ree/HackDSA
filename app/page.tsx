@@ -15,7 +15,6 @@ const NAV_ITEMS: { id: NavSection; icon: React.ReactNode; label: string }[] = [
   { id: 'visualizer', icon: <Microscope size={20} />, label: 'Visualizer' },
   { id: 'codelab', icon: <Code size={20} />, label: 'Code Lab' },
   { id: 'quiz', icon: <Puzzle size={20} />, label: 'Quiz' },
-  { id: 'reference', icon: <BookOpen size={20} />, label: 'Reference' },
 ];
 
 // Splash Screen
@@ -68,6 +67,7 @@ export default function Home() {
   const [showSplash, setShowSplash] = useState(true);
   const [activeSection, setActiveSection] = useState<NavSection>('visualizer');
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+  const [isRefDrawerOpen, setIsRefDrawerOpen] = useState(false);
 
   useEffect(() => {
     const isDark = document.documentElement.classList.contains('dark');
@@ -105,7 +105,7 @@ export default function Home() {
       if (e.key === '1') navigate('visualizer');
       if (e.key === '2') navigate('codelab');
       if (e.key === '3') navigate('quiz');
-      if (e.key === '4') navigate('reference');
+      if (e.key === 'r' || e.key === 'R') setIsRefDrawerOpen(prev => !prev);
     }
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
@@ -182,6 +182,11 @@ export default function Home() {
             );
           })}
 
+          {/* Reference Toggler */}
+          <button onClick={() => setIsRefDrawerOpen(!isRefDrawerOpen)} title="Toggle Reference Chart" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 36, height: 36, borderRadius: 10, background: isRefDrawerOpen ? 'var(--accent-primary-bg)' : 'transparent', border: `1px solid ${isRefDrawerOpen ? 'var(--accent-primary-border)' : 'var(--border-glass)'}`, color: isRefDrawerOpen ? 'var(--accent-primary)' : 'var(--text-secondary)', cursor: 'pointer', transition: 'all 0.2s', marginLeft: 8 }}>
+            <BookOpen size={18} />
+          </button>
+
           {/* Theme Toggler */}
           <button onClick={toggleTheme} title="Toggle Theme" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 36, height: 36, borderRadius: 10, background: 'transparent', border: '1px solid var(--border-glass)', color: 'var(--text-secondary)', cursor: 'pointer', transition: 'all 0.2s', marginLeft: 8 }}>
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
@@ -198,11 +203,46 @@ export default function Home() {
           {activeSection === 'quiz' && (
             <div style={{ height: '100%', overflowY: 'auto' }}><QuizMode /></div>
           )}
-          {activeSection === 'reference' && (
-            <div style={{ height: '100%' }}><Reference /></div>
-          )}
         </div>
       </main>
+      
+      {/* Global Reference Drawer */}
+      <div style={{ 
+        position: 'fixed', 
+        top: 0, 
+        right: 0, 
+        bottom: 0, 
+        width: 'min(90vw, 1000px)', 
+        background: 'var(--bg-main)', 
+        zIndex: 1000, 
+        transform: isRefDrawerOpen ? 'translateX(0)' : 'translateX(100%)', 
+        transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+        boxShadow: isRefDrawerOpen ? '-10px 0 30px rgba(0,0,0,0.3)' : 'none',
+        display: 'flex',
+        flexDirection: 'column',
+        borderLeft: '1px solid var(--border-glass)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+      }}>
+        {isRefDrawerOpen && <Reference isDrawer onClose={() => setIsRefDrawerOpen(false)} />}
+      </div>
+
+      {/* Backdrop for drawer */}
+      {isRefDrawerOpen && (
+        <div 
+          onClick={() => setIsRefDrawerOpen(false)}
+          style={{ 
+            position: 'fixed', 
+            inset: 0, 
+            background: 'rgba(0,0,0,0.4)', 
+            zIndex: 999, 
+            backdropFilter: 'blur(4px)',
+            WebkitBackdropFilter: 'blur(4px)',
+            animation: 'fadeIn 0.3s ease'
+          }} 
+        />
+      )}
+
       <Analytics/>
     </div>
   );

@@ -50,14 +50,20 @@ const CATEGORIES = ['Sorting', 'Searching', 'Trees', 'Graphs', 'Structures', 'DP
 const glass: React.CSSProperties = { background: 'var(--bg-glass)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', border: '1px solid var(--border-glass)', borderRadius: 12 };
 
 function complexity(str: string): string {
-    if (str.includes('n²') || str.includes('n²')) return 'var(--color-danger)';
-    if (str.includes('n log n') || str.includes('nW') || str.includes('nk') || str.includes('n+k') || str.includes('VE') || str.includes('mn')) return 'var(--color-warning)';
-    if (str.includes('log n') || str.includes('V+E') || str.includes('E log')) return 'var(--accent-primary)';
-    if (str === 'O(1)' || str === 'O(n)') return 'var(--color-success)';
+    const s = str.toLowerCase();
+    if (s.includes('n²') || s.includes('n^2')) return 'var(--color-danger)';
+    if (s.includes('n log n') || s.includes('nw') || s.includes('nk') || s.includes('n+k') || s.includes('ve') || s.includes('mn')) return 'var(--color-warning)';
+    if (s.includes('log n') || s.includes('v+e') || s.includes('e log')) return 'var(--accent-primary)';
+    if (s === 'o(1)' || s === 'o(n)') return 'var(--color-success)';
     return 'var(--text-primary)';
 }
 
-export default function Reference() {
+interface ReferenceProps {
+    onClose?: () => void;
+    isDrawer?: boolean;
+}
+
+export default function Reference({ onClose, isDrawer }: ReferenceProps) {
     const [search, setSearch] = useState('');
     const [selectedCat, setSelectedCat] = useState<string | null>(null);
     const [selectedDoc, setSelectedDoc] = useState<string | null>(null);
@@ -68,13 +74,27 @@ export default function Reference() {
         return matchesCat && matchesSearch;
     });
 
-    const thStyle: React.CSSProperties = { padding: '10px 12px', textAlign: 'left', fontFamily: 'system-ui, -apple-system, sans-serif', fontSize: 11, fontWeight: 700, color: 'var(--text-secondary)', letterSpacing: 1, borderBottom: '1px solid var(--bg-panel-hover)', whiteSpace: 'nowrap' };
-    const tdStyle: React.CSSProperties = { padding: '10px 12px', borderBottom: '1px solid var(--bg-panel-hover)', fontFamily: 'JetBrains Mono', fontSize: 12 };
+    const thStyle: React.CSSProperties = { 
+        padding: '12px 14px', 
+        textAlign: 'left', 
+        fontFamily: 'system-ui, -apple-system, sans-serif', 
+        fontSize: 11, 
+        fontWeight: 700, 
+        color: 'var(--text-secondary)', 
+        letterSpacing: 1, 
+        borderBottom: '1px solid var(--border-glass)', 
+        whiteSpace: 'nowrap',
+        position: 'sticky',
+        top: 0,
+        zIndex: 10,
+        background: 'var(--bg-panel)'
+    };
+    const tdStyle: React.CSSProperties = { padding: '12px 14px', borderBottom: '1px solid var(--bg-panel-hover)', fontFamily: 'JetBrains Mono', fontSize: 12 };
 
     return (
-        <div style={{ padding: 24, display: 'flex', flexDirection: 'column', gap: 20, height: '100%', overflowY: 'auto' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontFamily: 'system-ui, -apple-system, sans-serif', fontSize: 22, fontWeight: 800, color: 'var(--text-primary)', flex: '0 0 auto' }}><BookOpen size={24} /> Reference Sheet</div>
+        <div style={{ padding: isDrawer ? 16 : 24, display: 'flex', flexDirection: 'column', gap: 20, height: '100%', overflow: 'hidden', position: 'relative' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap', flexShrink: 0 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontFamily: 'system-ui, -apple-system, sans-serif', fontSize: isDrawer ? 20 : 22, fontWeight: 800, color: 'var(--text-primary)', flex: '0 0 auto' }}><BookOpen size={24} /> Reference Sheet</div>
                 <div style={{ flex: 1, minWidth: 200, position: 'relative' }}>
                     <Search size={16} color="var(--text-secondary)" style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)' }} />
                     <input
@@ -83,10 +103,15 @@ export default function Reference() {
                         style={{ width: '100%', padding: '10px 16px 10px 36px', background: 'var(--bg-panel)', border: '1px solid var(--border-main)', borderRadius: 8, color: 'var(--text-primary)', fontFamily: 'system-ui, -apple-system, sans-serif', fontSize: 14, outline: 'none' }}
                     />
                 </div>
+                {onClose && (
+                    <button onClick={onClose} style={{ padding: 8, background: 'transparent', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <X size={24} />
+                    </button>
+                )}
             </div>
 
             {/* Category filter */}
-            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', flexShrink: 0 }}>
                 <button onClick={() => setSelectedCat(null)}
                     style={{ padding: '6px 14px', borderRadius: 6, border: `1px solid ${!selectedCat ? 'var(--accent-primary)' : 'var(--border-main)'}`, background: !selectedCat ? 'var(--accent-primary-bg)' : 'transparent', color: !selectedCat ? 'var(--accent-primary)' : 'var(--text-secondary)', fontFamily: 'system-ui, -apple-system, sans-serif', fontSize: 13, cursor: 'pointer' }}>
                     All
@@ -99,8 +124,11 @@ export default function Reference() {
                 ))}
             </div>
 
+            {/* Scrollable Content Area */}
+            <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 20, paddingRight: 4 }}>
+
             {/* Table */}
-            <div style={{ ...glass, overflow: 'auto' }}>
+            <div style={{ ...glass, overflow: 'auto', flex: 1, minHeight: 300 }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 900 }}>
                     <thead>
                         <tr style={{ background: 'var(--bg-main)' }}>
@@ -263,6 +291,7 @@ export default function Reference() {
                     </div>
                 </div>
             )}
+            </div>
         </div>
     );
 }
