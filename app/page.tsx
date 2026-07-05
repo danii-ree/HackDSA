@@ -182,7 +182,6 @@ export default function Home() {
             );
           })}
 
-          {/* Reference Toggler */}
           <button onClick={() => setIsRefDrawerOpen(!isRefDrawerOpen)} title="Toggle Reference Chart" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 36, height: 36, borderRadius: 10, background: isRefDrawerOpen ? 'var(--accent-primary-bg)' : 'transparent', border: `1px solid ${isRefDrawerOpen ? 'var(--accent-primary-border)' : 'var(--border-glass)'}`, color: isRefDrawerOpen ? 'var(--accent-primary)' : 'var(--text-secondary)', cursor: 'pointer', transition: 'all 0.2s', marginLeft: 8 }}>
             <BookOpen size={18} />
           </button>
@@ -206,7 +205,6 @@ export default function Home() {
         </div>
       </main>
       
-      {/* Global Reference Drawer */}
       <div style={{ 
         position: 'fixed', 
         top: 0, 
@@ -227,7 +225,6 @@ export default function Home() {
         {isRefDrawerOpen && <Reference isDrawer onClose={() => setIsRefDrawerOpen(false)} />}
       </div>
 
-      {/* Backdrop for drawer */}
       {isRefDrawerOpen && (
         <div 
           onClick={() => setIsRefDrawerOpen(false)}

@@ -124,7 +124,6 @@ export default function Reference({ onClose, isDrawer }: ReferenceProps) {
                 ))}
             </div>
 
-            {/* Scrollable Content Area */}
             <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 20, paddingRight: 4 }}>
 
             {/* Table */}
